@@ -42,7 +42,7 @@ export default function NavSideBar({children}) {
                         </ul>
                     </div>
                 </div>
-                <div className="grid h-screen m-2 p-5 card bg-base-200 rounded-2xl">
+                <div className="grid h-screen m-2 p-5 card bg-base-200 rounded-2xl overflow-y-scroll">
                     {children}
                 </div>
             </div>
