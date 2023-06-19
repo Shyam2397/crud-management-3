@@ -1,5 +1,9 @@
+import { useNavigate } from "react-router-dom"
 import logo from "../assets/apple.png"
 export default function NavSideBar({children}) {
+
+    const navigate = useNavigate()
+
     return (
         <div className="drawer lg:drawer-open z-50 ">
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -23,7 +27,9 @@ export default function NavSideBar({children}) {
                                     </div>
                                 </label>
                                 <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-                                    <li>
+                                    <li
+                                        onClick={()=>navigate("/profile")}
+                                    >
                                         <a className="justify-between">
                                             Profile
                                             <span className="badge">New</span>
@@ -36,7 +42,7 @@ export default function NavSideBar({children}) {
                         </ul>
                     </div>
                 </div>
-                <div className="grid h-screen m-2 card bg-base-200 rounded-2xl">
+                <div className="grid h-screen m-2 p-5 card bg-base-200 rounded-2xl">
                     {children}
                 </div>
             </div>
@@ -45,17 +51,27 @@ export default function NavSideBar({children}) {
                 <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-80 h-full text-white bg-blue-500">
                     {/* Sidebar content here */}
-                    <li className="place-content-center"><img className="w-20 h-20 hover:bg-transparent" src={logo}/></li>
+                    <li className="place-content-center"
+                        onClick={()=>navigate("/")}
+                    ><img className="w-20 h-20 hover:bg-transparent" src={logo}/></li>
                     <hr />
-                    <li><a className="hover:bg-base-300 py-4">Dashboard</a></li>
+                    <li
+                        onClick={()=>navigate("/")}
+                    ><a className="hover:bg-base-300 py-4">Dashboard</a></li>
                     <hr />
                     <header className="text-xs pt-3">STUDENTS</header>
-                    <li><a className="hover:bg-base-300 py-4">Students List</a></li>
+                    <li
+                        onClick={()=>navigate("/students/all")}
+                    ><a className="hover:bg-base-300 py-4">Students List</a></li>
                     <hr />
                     <header className="text-xs pt-3">TEACHERS</header>
-                    <li><a className="hover:bg-base-300 py-4">Teachers List</a></li>
+                    <li
+                        onClick={()=>navigate("/teachers/all")}
+                    ><a className="hover:bg-base-300 py-4">Teachers List</a></li>
                     <hr />
-                    <li><a className="hover:bg-base-300 py-4">Interview Notes</a></li>
+                    <li
+                        onClick={()=>navigate("/interview/notes")}
+                    ><a className="hover:bg-base-300 py-4">Interview Notes</a></li>
                 </ul>
 
             </div>
