@@ -3,7 +3,7 @@ import NavSideBar from "../components/NavSideBar";
 export default function Profile() {
   return (
     <NavSideBar>
-        <div>Profile</div>
+      <div>Profile</div>
     </NavSideBar>
-  )
+  );
 }
