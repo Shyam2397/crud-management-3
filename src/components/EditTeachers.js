@@ -102,7 +102,7 @@ export default function EditTeachers() {
           className="btn btn-primary w-48 mt-20 rounded-full"
           onClick={() => editTeacher()}
         >
-          Add Teacher
+          Edit Teacher
         </button>
       </div>
     </NavSideBar>
