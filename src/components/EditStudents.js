@@ -11,25 +11,32 @@ export default function EditStudents() {
   const { id } = useParams();
 
   const [idx, setIdx] = useState("");
-  const [name, setName] = useState("");
-  const [batch, setBatch] = useState("");
-  const [education, setEducation] = useState("");
+  const [Name, setName] = useState("");
+  const [Email, setEmail] = useState("");
+  const [Qualification, setQualification] = useState("");
+  const [Batch, setBatch] = useState("");
+  const [mobile, setMobile] = useState("");
 
   useEffect(() => {
     const selectedStudent = studentData.find((stud, index) => stud.id == id);
 
     setIdx(selectedStudent.id);
-    setName(selectedStudent.name);
-    setBatch(selectedStudent.batch);
-    setEducation(selectedStudent.education);
+    setName(selectedStudent.Name);
+    setEmail(selectedStudent.Email);
+    setQualification(selectedStudent.Qualification);
+    setBatch(selectedStudent.Batch);
+    setMobile(selectedStudent.mobile);
+    
   }, [id, studentData]);
 
   function editStudent() {
     const editedStudObj = {
       id: idx,
-      name,
-      batch,
-      education,
+      Name,
+      Email,
+      Qualification,
+      Batch,
+      mobile
     };
     // console.log(editedStudObj)
 
@@ -43,15 +50,15 @@ export default function EditStudents() {
   return (
     <NavSideBar>
       <CrumBar />
-      <div className="form-control text-center items-center">
-        <h1 className="m-5">Fill the Data to edit a Students</h1>
+      <div className="form-control text-center items-center overflow-y-scroll">
+        <h1 className="m-5">Fill the Data to add a New Students</h1>
         <label className="input-group">
           <span className="w-48">ID</span>
           <input
             type="number"
             placeholder="Enter your id"
             className="input input-bordered w-auto m-5"
-            value={idx}
+            value={id}
             onChange={(e) => setIdx(e.target.value)}
           />
         </label>
@@ -61,8 +68,28 @@ export default function EditStudents() {
             type="text"
             placeholder="Enter your name"
             className="input input-bordered w-auto m-5"
-            value={name}
+            value={Name}
             onChange={(e) => setName(e.target.value)}
+          />
+        </label>
+        <label className="input-group">
+          <span className="w-48">MAIL</span>
+          <input
+            type="text"
+            placeholder="Enter your mail"
+            className="input input-bordered w-auto m-5"
+            value={Email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </label>
+        <label className="input-group">
+          <span className="w-48">QUALIFICATION</span>
+          <input
+            type="text"
+            placeholder="Enter your qualification"
+            className="input input-bordered w-auto m-5"
+            value={Qualification}
+            onChange={(e) => setQualification(e.target.value)}
           />
         </label>
         <label className="input-group">
@@ -71,22 +98,22 @@ export default function EditStudents() {
             type="text"
             placeholder="Enter your batch"
             className="input input-bordered w-auto m-5"
-            value={batch}
+            value={Batch}
             onChange={(e) => setBatch(e.target.value)}
           />
         </label>
         <label className="input-group">
-          <span className="w-48">EDUCATION</span>
+          <span className="w-48">MOBILE NUMBER</span>
           <input
             type="text"
-            placeholder="Enter your education"
+            placeholder="Enter your mobile number"
             className="input input-bordered w-auto m-5"
-            value={education}
-            onChange={(e) => setEducation(e.target.value)}
+            value={mobile}
+            onChange={(e) => setMobile(e.target.value)}
           />
         </label>
         <button
-          className="btn btn-primary w-48 mt-20"
+          className="btn btn-primary w-48 mt-20 rounded-full"
           onClick={() => editStudent()}
         >
           Edit Student

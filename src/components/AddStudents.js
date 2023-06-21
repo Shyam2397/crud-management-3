@@ -6,18 +6,22 @@ import { Appstate } from "../context/AppProvider";
 export default function AddStudents() {
   const { studentData, setData } = Appstate();
   const [id, setId] = useState("");
-  const [name, setName] = useState("");
-  const [batch, setBatch] = useState("");
-  const [education, setEducation] = useState("");
+  const [Name, setName] = useState("");
+  const [Email, setEmail] = useState("");
+  const [Qualification, setQualification] = useState("");
+  const [Batch, setBatch] = useState("");
+  const [mobile, setMobile] = useState("");
 
   const navigate = useNavigate();
 
   function addStudent() {
     const newStudentObj = {
       id,
-      name,
-      batch,
-      education,
+      Name,
+      Email,
+      Qualification,
+      Batch,
+      mobile
     };
     setData([...studentData, newStudentObj]);
 
@@ -44,8 +48,28 @@ export default function AddStudents() {
             type="text"
             placeholder="Enter your name"
             className="input input-bordered w-auto m-5"
-            value={name}
+            value={Name}
             onChange={(e) => setName(e.target.value)}
+          />
+        </label>
+        <label className="input-group">
+          <span className="w-48">MAIL</span>
+          <input
+            type="text"
+            placeholder="Enter your mail"
+            className="input input-bordered w-auto m-5"
+            value={Email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </label>
+        <label className="input-group">
+          <span className="w-48">QUALIFICATION</span>
+          <input
+            type="text"
+            placeholder="Enter your qualification"
+            className="input input-bordered w-auto m-5"
+            value={Qualification}
+            onChange={(e) => setQualification(e.target.value)}
           />
         </label>
         <label className="input-group">
@@ -54,18 +78,18 @@ export default function AddStudents() {
             type="text"
             placeholder="Enter your batch"
             className="input input-bordered w-auto m-5"
-            value={batch}
+            value={Batch}
             onChange={(e) => setBatch(e.target.value)}
           />
         </label>
         <label className="input-group">
-          <span className="w-48">EDUCATION</span>
+          <span className="w-48">MOBILE NUMBER</span>
           <input
             type="text"
-            placeholder="Enter your education"
+            placeholder="Enter your mobile number"
             className="input input-bordered w-auto m-5"
-            value={education}
-            onChange={(e) => setEducation(e.target.value)}
+            value={mobile}
+            onChange={(e) => setMobile(e.target.value)}
           />
         </label>
         <button

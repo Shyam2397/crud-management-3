@@ -1,29 +1,9 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
+import { API } from "../API/api"
 
 
 const AppCtx = createContext()
 function AppProvider({children}) {
-
-  const sdataBase = [
-    {
-      id: 1,
-      name: "Kumar",
-      batch: "b47wd",
-      education: "B.E"
-    },
-    {
-      id: 2,
-      name: "sudha",
-      batch: "b47we",
-      education: "B.com"
-    },
-    {
-      id: 3,
-      name: "saran",
-      batch: "b47Be",
-      education: "Bsc"
-    }
-  ]
 
   const tdataBase = [
     {
@@ -65,9 +45,20 @@ function AppProvider({children}) {
   const [crumState, setCrumState] = useState(spages)
   const [tcrumState,setTcrumState] = useState(tpages)
 
-  const [studentData, setData] = useState(sdataBase)
+  const [studentData, setData] = useState([])
   const [teacherData,setTeacherData] = useState(tdataBase)
 
+  useEffect(()=>{
+    const getAllStudents = async()=>{
+      const response = await fetch(API,{
+        method:"GET"
+      })
+      const data = await response.json();
+      // console.log(data)
+      setData(data)
+    }
+    getAllStudents()
+  },[])
 
   return (
     <AppCtx.Provider
