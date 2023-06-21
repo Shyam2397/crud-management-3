@@ -8,6 +8,8 @@ import Profile from "./pages/Profile";
 import Nopage from "./pages/Nopage";
 import AddStudents from "./components/AddStudents";
 import EditStudents from "./components/EditStudents";
+import AddTeachers from "./components/AddTeachers";
+import EditTeachers from "./components/EditTeachers";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route exact path="/" element={<DashBoard />} />
         <Route path="/addStudents" element={<AddStudents />} />
         <Route path="/editStudents/:id" element={<EditStudents />} />
+        <Route path="/addTeachers" element={<AddTeachers />} />
+        <Route path="/editTeachers/:id" element={<EditTeachers />} />
         <Route path="/students/all" element={<StudentsList />} />
         <Route path="/teachers/all" element={<TeachersList />} />
         <Route path="/interview/notes" element={<InterviewNotes />} />

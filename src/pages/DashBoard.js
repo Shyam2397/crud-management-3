@@ -15,14 +15,17 @@ export default function DashBoard() {
             <h1 className="font-bold">Students</h1>
             <button
               className="btn btn-primary rounded-full mt-3"
-              onClick={() => navigate("/AddStudents")}
+              onClick={() => navigate("/addStudents")}
             >
               Add More Students
             </button>
           </div>
           <div className="card bg-white rounded-3xl w-52 p-3 place-items-center">
             <h1 className="font-bold">Teachers</h1>
-            <button className="btn btn-primary rounded-full mt-3">
+            <button 
+              className="btn btn-primary rounded-full mt-3"
+              onClick={() => navigate("/addteachers")}
+              >
               Add more teachers
             </button>
           </div>
