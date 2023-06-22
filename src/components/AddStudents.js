@@ -2,10 +2,11 @@ import { useState } from "react";
 import NavSideBar from "./NavSideBar";
 import { useNavigate } from "react-router-dom";
 import { Appstate } from "../context/AppProvider";
+import { API } from "../API/api";
 
 export default function AddStudents() {
-  const { studentData, setData } = Appstate();
-  const [id, setId] = useState("");
+  const { studentData, setData } = Appstate()
+
   const [Name, setName] = useState("");
   const [Email, setEmail] = useState("");
   const [Qualification, setQualification] = useState("");
@@ -14,16 +15,26 @@ export default function AddStudents() {
 
   const navigate = useNavigate();
 
-  function addStudent() {
+  async function addStudent() {
+
     const newStudentObj = {
-      id,
       Name,
       Email,
       Qualification,
       Batch,
       mobile
     };
-    setData([...studentData, newStudentObj]);
+
+    const response = await fetch(API,{
+      method:"POST",
+      body : JSON.stringify(newStudentObj),
+      headers:{
+        "Content-type":"application/json"
+      }
+    })
+    const data = await response.json()
+   
+    setData([...studentData, data]);
 
     navigate("/students/all");
   }
@@ -32,16 +43,6 @@ export default function AddStudents() {
     <NavSideBar>
       <div className="form-control text-center items-center">
         <h1 className="m-5">Fill the Data to add a New Students</h1>
-        <label className="input-group">
-          <span className="w-48">ID</span>
-          <input
-            type="number"
-            placeholder="Enter your id"
-            className="input input-bordered w-auto m-5"
-            value={id}
-            onChange={(e) => setId(e.target.value)}
-          />
-        </label>
         <label className="input-group">
           <span className="w-48">NAME</span>
           <input

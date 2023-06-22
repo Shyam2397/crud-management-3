@@ -31,7 +31,7 @@ function StudentCard({ student }) {
   };
   return (
     <div>
-      <div className="card w-64 bg-base-100 shadow-xl p-0 rounded-3xl">
+      <div className="card w-72 bg-base-100 shadow-xl p-0 rounded-3xl">
         <div className="card-body ">
           <h2 className="card-title justify-center uppercase">
             {student.Name}

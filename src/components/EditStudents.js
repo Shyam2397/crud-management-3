@@ -3,6 +3,7 @@ import CrumBar from "./CrumBar";
 import NavSideBar from "./NavSideBar";
 import { useNavigate, useParams } from "react-router-dom";
 import { Appstate } from "../context/AppProvider";
+import { API } from "../API/api";
 
 export default function EditStudents() {
   const { studentData, setData } = Appstate();
@@ -10,7 +11,7 @@ export default function EditStudents() {
 
   const { id } = useParams();
 
-  const [idx, setIdx] = useState("");
+
   const [Name, setName] = useState("");
   const [Email, setEmail] = useState("");
   const [Qualification, setQualification] = useState("");
@@ -20,7 +21,7 @@ export default function EditStudents() {
   useEffect(() => {
     const selectedStudent = studentData.find((stud, index) => stud.id == id);
 
-    setIdx(selectedStudent.id);
+    
     setName(selectedStudent.Name);
     setEmail(selectedStudent.Email);
     setQualification(selectedStudent.Qualification);
@@ -29,9 +30,9 @@ export default function EditStudents() {
     
   }, [id, studentData]);
 
-  function editStudent() {
+ async function editStudent() {
     const editedStudObj = {
-      id: idx,
+    
       Name,
       Email,
       Qualification,
@@ -40,8 +41,20 @@ export default function EditStudents() {
     };
     // console.log(editedStudObj)
 
+    const response = await fetch(`${API}/${id}`,{
+      method:"PUT",
+      body: JSON.stringify(editedStudObj),
+      headers:{
+        "Content-type":"application/json"
+      }
+    })
+
+    const data = await response.json()
+
     const editIndex = studentData.findIndex((stud, index) => stud.id == id);
-    studentData[editIndex] = editedStudObj;
+    studentData[editIndex] = data;
+
+
     setData([...studentData]);
 
     navigate("/students/all");
@@ -52,16 +65,7 @@ export default function EditStudents() {
       <CrumBar />
       <div className="form-control text-center items-center overflow-y-scroll">
         <h1 className="m-5">Fill the Data to add a New Students</h1>
-        <label className="input-group">
-          <span className="w-48">ID</span>
-          <input
-            type="number"
-            placeholder="Enter your id"
-            className="input input-bordered w-auto m-5"
-            value={id}
-            onChange={(e) => setIdx(e.target.value)}
-          />
-        </label>
+
         <label className="input-group">
           <span className="w-48">NAME</span>
           <input
