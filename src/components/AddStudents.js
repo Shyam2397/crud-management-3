@@ -3,37 +3,56 @@ import NavSideBar from "./NavSideBar";
 import { useNavigate } from "react-router-dom";
 import { Appstate } from "../context/AppProvider";
 import { API } from "../API/api";
+import { useFormik } from "formik";
+import { StudentSchema } from "../Schema/Schema";
 
 export default function AddStudents() {
-  const { studentData, setData } = Appstate()
+  // form validation topic
 
-  const [Name, setName] = useState("");
-  const [Email, setEmail] = useState("");
-  const [Qualification, setQualification] = useState("");
-  const [Batch, setBatch] = useState("");
-  const [mobile, setMobile] = useState("");
+  const { values, handleChange, handleSubmit, handleBlur, errors, touched } =
+    useFormik({
+      initialValues: {
+        Name: "",
+        Email: "",
+        Qualification: "",
+        Batch: "",
+        mobile: "",
+      },
+      validationSchema: StudentSchema,
+      onSubmit: (newstudent) => {
+        // console.log(newstudent)
+        addStudent(newstudent);
+      },
+    });
+
+  const { studentData, setData } = Appstate();
+
+  // const [Name, setName] = useState("");
+  // const [Email, setEmail] = useState("");
+  // const [Qualification, setQualification] = useState("");
+  // const [Batch, setBatch] = useState("");
+  // const [mobile, setMobile] = useState("");
 
   const navigate = useNavigate();
 
-  async function addStudent() {
+  async function addStudent(newstudent) {
+    // const newStudentObj = {
+    //   Name,
+    //   Email,
+    //   Qualification,
+    //   Batch,
+    //   mobile
+    // };
 
-    const newStudentObj = {
-      Name,
-      Email,
-      Qualification,
-      Batch,
-      mobile
-    };
+    const response = await fetch(API, {
+      method: "POST",
+      body: JSON.stringify(newstudent),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+    const data = await response.json();
 
-    const response = await fetch(API,{
-      method:"POST",
-      body : JSON.stringify(newStudentObj),
-      headers:{
-        "Content-type":"application/json"
-      }
-    })
-    const data = await response.json()
-   
     setData([...studentData, data]);
 
     navigate("/students/all");
@@ -42,63 +61,97 @@ export default function AddStudents() {
   return (
     <NavSideBar>
       <div className="form-control text-center items-center">
-        <h1 className="m-5">Fill the Data to add a New Students</h1>
-        <label className="input-group">
-          <span className="w-48">NAME</span>
-          <input
-            type="text"
-            placeholder="Enter your name"
-            className="input input-bordered w-auto m-5"
-            value={Name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </label>
-        <label className="input-group">
-          <span className="w-48">MAIL</span>
-          <input
-            type="text"
-            placeholder="Enter your mail"
-            className="input input-bordered w-auto m-5"
-            value={Email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-        <label className="input-group">
-          <span className="w-48">QUALIFICATION</span>
-          <input
-            type="text"
-            placeholder="Enter your qualification"
-            className="input input-bordered w-auto m-5"
-            value={Qualification}
-            onChange={(e) => setQualification(e.target.value)}
-          />
-        </label>
-        <label className="input-group">
-          <span className="w-48">BATCH</span>
-          <input
-            type="text"
-            placeholder="Enter your batch"
-            className="input input-bordered w-auto m-5"
-            value={Batch}
-            onChange={(e) => setBatch(e.target.value)}
-          />
-        </label>
-        <label className="input-group">
-          <span className="w-48">MOBILE NUMBER</span>
-          <input
-            type="text"
-            placeholder="Enter your mobile number"
-            className="input input-bordered w-auto m-5"
-            value={mobile}
-            onChange={(e) => setMobile(e.target.value)}
-          />
-        </label>
-        <button
-          className="btn btn-primary w-48 mt-20 rounded-full"
-          onClick={() => addStudent()}
-        >
-          Add Student
-        </button>
+        <form onSubmit={handleSubmit}>
+          <h1 className="m-5">Fill the Data to add a New Students</h1>
+          <label className="input-group">
+            <span className="w-48">NAME</span>
+            <input
+              type="text"
+              placeholder="Enter your name"
+              className="input input-bordered w-auto m-5"
+              value={values.Name}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name="Name"
+            />
+          </label>
+          {touched.Name && errors.Name ? (
+            <div className="text-red-500">{errors.Name}</div>) : ("")}
+          <label className="input-group">
+            <span className="w-48">MAIL</span>
+            <input
+              type="text"
+              placeholder="Enter your mail"
+              className="input input-bordered w-auto m-5"
+              value={values.Email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name="Email"
+            />
+          </label>
+          {touched.Email && errors.Email ? (
+            <div className="text-red-500">{errors.Email}</div>
+          ) : (
+            ""
+          )}
+          <label className="input-group">
+            <span className="w-48">QUALIFICATION</span>
+            <input
+              type="text"
+              placeholder="Enter your qualification"
+              className="input input-bordered w-auto m-5"
+              value={values.Qualification}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name="Qualification"
+            />
+          </label>
+          {touched.Qualification && errors.Qualification ? (
+            <div className="text-red-500">{errors.Qualification}</div>
+          ) : (
+            ""
+          )}
+          <label className="input-group">
+            <span className="w-48">BATCH</span>
+            <input
+              type="text"
+              placeholder="Enter your batch"
+              className="input input-bordered w-auto m-5"
+              value={values.Batch}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name="Batch"
+            />
+          </label>
+          {touched.Batch && errors.Batch ? (
+            <div className="text-red-500">{errors.Batch}</div>
+          ) : (
+            ""
+          )}
+          <label className="input-group">
+            <span className="w-48">MOBILE NUMBER</span>
+            <input
+              type="text"
+              placeholder="Enter your mobile number"
+              className="input input-bordered w-auto m-5"
+              value={values.mobile}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name="mobile"
+            />
+          </label>
+          {touched.mobile && errors.mobile ? (
+            <div className="text-red-500">{errors.mobile}</div>
+          ) : (
+            ""
+          )}
+          <button
+            className="btn btn-primary w-48 mt-20 rounded-full"
+            type="submit"
+          >
+            Add Student
+          </button>
+        </form>
       </div>
     </NavSideBar>
   );
