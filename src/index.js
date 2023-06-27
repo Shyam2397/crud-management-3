@@ -5,13 +5,23 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import AppProvider from "./context/AppProvider";
+import { configureStore } from "@reduxjs/toolkit";
+import { Provider } from "react-redux";
+
+const store = configureStore({
+  reducer: {
+    loginreducer: {},
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <AppProvider>
-      <App />
-    </AppProvider>
+    <Provider store = {store}>
+      <AppProvider>
+        <App />
+      </AppProvider>
+    </Provider>
   </BrowserRouter>
 );
 
