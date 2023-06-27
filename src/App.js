@@ -10,11 +10,13 @@ import AddStudents from "./components/AddStudents";
 import EditStudents from "./components/EditStudents";
 import AddTeachers from "./components/AddTeachers";
 import EditTeachers from "./components/EditTeachers";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
     <div className="App">
       <Routes>
+        <Route path="/login" element={<LoginPage />} />
         <Route exact path="/" element={<DashBoard />} />
         <Route path="/addStudents" element={<AddStudents />} />
         <Route path="/editStudents/:id" element={<EditStudents />} />
