@@ -62,7 +62,7 @@ export default function AddStudents() {
     <NavSideBar>
       <div className="form-control text-center items-center">
         <form onSubmit={handleSubmit}>
-          <h1 className="m-5">Fill the Data to add a New Students</h1>
+          <h1 className="m-5">Fill in the data to add a New Student</h1>
           <label className="input-group">
             <span className="w-48">NAME</span>
             <input
