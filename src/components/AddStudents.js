@@ -76,7 +76,10 @@ export default function AddStudents() {
             />
           </label>
           {touched.Name && errors.Name ? (
-            <div className="text-red-500">{errors.Name}</div>) : ("")}
+            <div className="text-red-500">{errors.Name}</div>
+          ) : (
+            ""
+          )}
           <label className="input-group">
             <span className="w-48">MAIL</span>
             <input
