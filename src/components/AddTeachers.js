@@ -29,7 +29,7 @@ export default function AddTeachers() {
   return (
     <NavSideBar>
       <div className="form-control text-center items-center">
-        <h1 className="m-5">Fill the Data to add a New Teachers</h1>
+        <h1 className="m-5">Fill in the data to add a New Teacher</h1>
         <label className="input-group">
           <span className="w-48">ID</span>
           <input
