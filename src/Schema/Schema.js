@@ -7,7 +7,7 @@ export const StudentSchema = yup.object({
     .string()
     .required("Please fill the qualification")
     .min(2, "Please fill valid qualification")
-    .max(10, "Don't playaround right valid details"),
+    .max(20, "Don't playaround right valid details"),
   Batch: yup
     .string()
     .required("Please fill the batch")
