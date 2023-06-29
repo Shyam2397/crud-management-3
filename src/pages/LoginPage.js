@@ -1,4 +1,26 @@
+import { useState } from "react";
+import { loginUser } from "../Reducers/LoginReducer";
+import { useNavigate } from "react-router-dom";
+import {useDispatch} from "react-redux"
+
 export default function LoginPage() {
+
+    const navigate =useNavigate()
+    const [username,setUsername] = useState("")
+    const [password,setPassword] = useState("")
+    const dispatch = useDispatch()
+
+    const userLogin = ()=>{
+        const userData = {
+            username,
+            password
+        }
+        // console.log(userData)
+    dispatch(loginUser(userData))
+
+
+    navigate("/")
+    }
   return (
     <div className="flex flex-col w-full">
       <div className="grid h-screen bg-blue-500 place-items-center">
@@ -15,6 +37,8 @@ export default function LoginPage() {
                   type="text"
                   placeholder="enter your username"
                   className="input input-bordered w-full"
+                  value={username}
+                  onChange={(e)=>setUsername(e.target.value)}
                 />
               </label>
               <p className="mt-4">Password</p>
@@ -23,11 +47,17 @@ export default function LoginPage() {
                   type="password"
                   placeholder="enter your password"
                   className="input input-bordered w-full"
+                  value={password}
+                  onChange={(e)=>setPassword(e.target.value)}
                 />
               </label>
             </div>
             <div className="card-actions justify-center">
-              <button className="btn btn-primary rounded-full mt-4">login</button>
+              <button className="btn btn-primary rounded-full mt-4"
+               onClick={userLogin} 
+              >
+                login
+                </button>
             </div>
           </div>
         </div>

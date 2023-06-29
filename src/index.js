@@ -7,10 +7,11 @@ import { BrowserRouter } from "react-router-dom";
 import AppProvider from "./context/AppProvider";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
+import LoginReducer from "./Reducers/LoginReducer";
 
 const store = configureStore({
   reducer: {
-    loginreducer: {},
+    loginInfo : LoginReducer,
   },
 });
 

@@ -1,7 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/apple.png";
+import { useSelector,useDispatch } from "react-redux";
+import { logoutUser } from "../Reducers/LoginReducer";
+
 export default function NavSideBar({ children }) {
+  
   const navigate = useNavigate();
+  const {username} = useSelector(state=>state.loginInfo.data)
+  const dispatch = useDispatch()
+  // console.log(username)
 
   return (
     <div className="drawer lg:drawer-open z-50 ">
@@ -36,7 +43,7 @@ export default function NavSideBar({ children }) {
             <ul className="menu menu-horizontal">
               {/* Navbar menu content here */}
               <li>
-                <h1 className="text-2xl">Name</h1>
+                <h1 className="text-2xl">{username}</h1>
               </li>
               <div className="dropdown dropdown-end z-20">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
@@ -57,7 +64,7 @@ export default function NavSideBar({ children }) {
                   <li>
                     <a>Settings</a>
                   </li>
-                  <li>
+                  <li onClick={()=>dispatch(logoutUser(),navigate("/login"))}>
                     <a>Logout</a>
                   </li>
                 </ul>
