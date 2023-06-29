@@ -23,7 +23,7 @@ export default function StudentList() {
         </div>
         <div className="join absolute inset-x-0 bottom-0 justify-center">
           <button
-            onClick={() => setPage(currentPage - 1)}
+            onClick={() => (currentPage > 1 ? setPage(currentPage - 1) : "")}
             className={`join-item btn btn-md`}
           >
             Prev
@@ -41,7 +41,11 @@ export default function StudentList() {
             </button>
           ))}
           <button
-            onClick={() => setPage(currentPage + 1)}
+            onClick={() =>
+              currentPage < Math.ceil(studentData.length / 6)
+                ? setPage(currentPage + 1)
+                : ""
+            }
             className={`join-item btn btn-md`}
           >
             Next
