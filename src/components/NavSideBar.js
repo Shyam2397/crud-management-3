@@ -1,13 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/apple.png";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../Reducers/LoginReducer";
 
 export default function NavSideBar({ children }) {
-  
   const navigate = useNavigate();
-  const {username} = useSelector(state=>state.loginInfo.data)
-  const dispatch = useDispatch()
+  const { username } = useSelector((state) => state.loginInfo.data);
+  const dispatch = useDispatch();
   // console.log(username)
 
   return (
@@ -64,7 +63,9 @@ export default function NavSideBar({ children }) {
                   <li>
                     <a>Settings</a>
                   </li>
-                  <li onClick={()=>dispatch(logoutUser(),navigate("/login"))}>
+                  <li
+                    onClick={() => dispatch(logoutUser(), navigate("/login"))}
+                  >
                     <a>Logout</a>
                   </li>
                 </ul>
